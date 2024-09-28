@@ -138,3 +138,94 @@
 
   - Flutter, Android toolchain 이 초록색 체크 박스여야 함
 
+> 문제 확인 결과
+```bash
+  Doctor summary (to see all details, run flutter doctor -v):
+  [✓] Flutter (Channel stable, 3.24.3, on Microsoft Windows [Version 10.0.22631.4169], locale ko-KR)
+  [✓] Windows Version (Installed version of Windows is version 10 or higher)
+  [!] Android toolchain - develop for Android devices (Android SDK version 35.0.0)
+      ✗ cmdline-tools component is missing
+        Run `path/to/sdkmanager --install "cmdline-tools;latest"`
+        See https://developer.android.com/studio/command-line for more details.
+      ✗ Android license status unknown.
+        Run `flutter doctor --android-licenses` to accept the SDK licenses.
+        See https://flutter.dev/to/windows-android-setup for more details.
+  [✓] Chrome - develop for the web
+  [✓] Visual Studio - develop Windows apps (Visual Studio Enterprise 2022 17.9.2)
+  [✓] Android Studio (version 2024.1)
+  [✓] IntelliJ IDEA Community Edition (version 2024.1)
+  [✓] IntelliJ IDEA Ultimate Edition (version 2023.3)
+  [✓] VS Code (version 1.93.1)
+  [✓] Connected device (3 available)
+  [✓] Network resources
+```
+
+<br>
+
+### 2. 'cmdline-tools component is missing' 문제 해결
+- 원인
+
+  - Android SDK Command Line Tools 가 설치되지 않아 발생
+ 
+- 해결
+
+  - Android Studio 실행 → [Customize] → [All settings]
+
+<br>
+
+### 3. 'Android license status unknown' 문제 해결
+- 원인
+
+  - 안드로이드 스튜디오를 사용하려면 라이선스 동의를 해야하는데 동의하지 않아 발생
+ 
+- 해결
+
+  - 터미널에서 'flutter doctor --android-licenses' 명령 실행
+ 
+  - 이후 모든 물음에 'y' 입력
+
+> 터미널
+```
+  flutter doctor --android-licenses
+```
+
+<br>
+
+|따라하기|
+|-|
+|![13](./img/13.png)|
+|![14](./img/14.png)|
+|![15](./img/15.png)|
+|![16](./img/16.png)|
+|![17](./img/17.png)|
+|![18](./img/18.png)|
+
+<br>
+
+#### 💡 터미널에서 'flutter doctor' 입력했더니 Error: Unable to find git in your PATH. 발생
+- Path 에 Git 경로 설정이 잘 되어있으나, 위 에러 발생
+
+  - 해결 방법
+ 
+    - Git의 안전한 디렉토리 목록에 모든 디렉토리를 추가
+
+> 터미널
+```
+  git config --global --add safe.directory '*'
+```
+- 이 설정을 사용하면 Git이 모든 디렉토리를 안전한 디렉토리로 간주
+    
+  - git config : Git의 설정을 변경하는 명령어
+    
+  - --global : 이 설정을 사용자의 모든 Git 프로젝트에 적용(현재 사용자에 대한 전역 설정)
+  
+  - --add : 특정 설정을 추가 ⇒ 같은 키에 대해 여러 값 설정 가능
+  
+  - safe.directory : Git이 안전하다고 간주하는 디렉토리 목록을 지정
+  
+    - 이 디렉토리에 대해 Git은 특정 작업(예: 푸시, 풀 등)을 허용
+      
+  - '*': 모든 디렉토리를 의미
+
+<br>
+
